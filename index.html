@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظام لجان الاختبار - الثانوية الثالثة بالخبر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-deep:#2d6a5f;
+  --teal:#3a8478;
+  --teal-light:#4fa394;
+  --teal-soft:#c8e6df;
+  --teal-mist:#e8f4f0;
+  --bg-cream:#f7f9f7;
+  --text-dark:#1a3a35;
+  --text-muted:#5a7872;
+  --accent-purple:#9b8cb8;
+  --card-1:#e8f4f0;
+  --card-2:#eef0f5;
+  --card-3:#f0ebf5;
+  --white:#ffffff;
+  --shadow:0 10px 40px rgba(45,106,95,0.08);
+  --shadow-lg:0 20px 60px rgba(45,106,95,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--bg-cream);
+  color:var(--text-dark);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+/* HERO */
+.hero{
+  position:relative;
+  min-height:60vh;
+  background:linear-gradient(135deg,rgba(45,106,95,0.92) 0%,rgba(58,132,120,0.88) 50%,rgba(79,163,148,0.85) 100%),
+    url('https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=80') center/cover;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:60px 20px 80px;
+  text-align:center;
+  color:white;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,0.1) 0%,transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(255,255,255,0.08) 0%,transparent 40%);
+  pointer-events:none;
+}
+.moe-logo{
+  width:180px;
+  height:auto;
+  background:white;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:20px;
+  padding:14px 20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+  animation:fadeDown 0.8s ease-out;
+}
+.moe-logo img{width:100%;height:100%;object-fit:contain}
+.school-badge{
+  display:inline-block;
+  padding:10px 24px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:30px;
+  font-size:15px;
+  font-weight:500;
+  margin-bottom:28px;
+  animation:fadeDown 0.8s ease-out 0.1s both;
+}
+.principal-badge{
+  margin-top:24px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 22px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:24px;
+  font-size:14px;
+  animation:fadeUp 0.9s ease-out 0.4s both;
+}
+.principal-badge svg{flex-shrink:0;opacity:0.85}
+.hero h1{
+  font-family:'Cairo',sans-serif;
+  font-size:clamp(36px,6vw,64px);
+  font-weight:800;
+  margin-bottom:20px;
+  letter-spacing:-0.5px;
+  animation:fadeUp 0.9s ease-out 0.1s both;
+  text-shadow:0 4px 20px rgba(0,0,0,0.15);
+}
+.hero p{
+  font-size:clamp(15px,2vw,18px);
+  opacity:0.95;
+  max-width:600px;
+  margin-bottom:36px;
+  font-weight:400;
+  animation:fadeUp 0.9s ease-out 0.2s both;
+}
+.cta-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 32px;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(12px);
+  border:1.5px solid rgba(255,255,255,0.4);
+  border-radius:50px;
+  color:white;
+  font-family:inherit;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  animation:fadeUp 0.9s ease-out 0.3s both;
+}
+.cta-btn:hover{
+  background:rgba(255,255,255,0.28);
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+/* MAIN CONTAINER */
+.container{
+  max-width:900px;
+  margin:-50px auto 0;
+  padding:0 20px 60px;
+  position:relative;
+  z-index:2;
+}
+.card{
+  background:var(--white);
+  border-radius:24px;
+  padding:32px 28px;
+  box-shadow:var(--shadow);
+  margin-bottom:24px;
+  animation:fadeUp 0.8s ease-out 0.4s both;
+}
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:14px;
+  margin-bottom:24px;
+}
+.card-icon{
+  width:48px;
+  height:48px;
+  background:var(--teal-mist);
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--teal);
+}
+.card-title{
+  font-family:'Cairo',sans-serif;
+  font-size:22px;
+  font-weight:700;
+  color:var(--text-dark);
+}
+/* COMMITTEE GROUPS */
+.committee-group{
+  display:block;
+  width:100%;
+  padding:18px 24px;
+  margin-bottom:12px;
+  border-radius:16px;
+  border:1.5px solid transparent;
+  font-family:inherit;
+  font-size:17px;
+  font-weight:600;
+  color:var(--text-dark);
+  text-align:center;
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+.committee-group.grade-1{background:var(--card-1);border-color:rgba(79,163,148,0.2)}
+.committee-group.grade-2{background:var(--card-2);border-color:rgba(155,140,184,0.15)}
+.committee-group.grade-3{background:var(--card-3);border-color:rgba(155,140,184,0.25)}
+.committee-group:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 25px rgba(45,106,95,0.12);
+}
+/* SEARCH */
+.search-row{
+  display:flex;
+  gap:12px;
+  align-items:stretch;
+}
+.search-input{
+  flex:1;
+  padding:18px 22px;
+  border:1.5px solid #e0e8e5;
+  border-radius:16px;
+  font-family:inherit;
+  font-size:16px;
+  background:#fafbfa;
+  color:var(--text-dark);
+  text-align:right;
+  transition:all 0.2s ease;
+}
+.search-input:focus{
+  outline:none;
+  border-color:var(--teal);
+  background:white;
+  box-shadow:0 0 0 4px rgba(58,132,120,0.1);
+}
+.search-input::placeholder{color:#a8b5b1}
+.search-btn{
+  width:62px;
+  background:var(--teal);
+  border:none;
+  border-radius:16px;
+  color:white;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all 0.2s ease;
+}
+.search-btn:hover{background:var(--teal-deep);transform:translateY(-1px)}
+/* PRIVACY BADGE */
+.privacy{
+  display:flex;
+  justify-content:center;
+  margin:28px 0;
+}
+.privacy-icon{
+  width:56px;
+  height:42px;
+  background:var(--teal);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  box-shadow:0 6px 20px rgba(58,132,120,0.3);
+}
+/* FOOTER */
+.footer{
+  background:linear-gradient(135deg,#1a3a35 0%,#2d6a5f 100%);
+  color:white;
+  padding:50px 20px 30px;
+  margin-top:40px;
+  position:relative;
+  overflow:hidden;
+}
+.footer::before{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-20%;
+  width:60%;
+  height:200%;
+  background:radial-gradient(circle,rgba(255,255,255,0.05) 0%,transparent 60%);
+}
+.footer-content{
+  max-width:900px;
+  margin:0 auto;
+  position:relative;
+}
+.footer-title{
+  font-family:'Cairo',sans-serif;
+  font-size:26px;
+  font-weight:700;
+  margin-bottom:24px;
+  text-align:right;
+}
+.team-member{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:14px;
+  padding:12px 0;
+  font-size:16px;
+  font-weight:400;
+}
+.member-icon{
+  width:32px;
+  height:32px;
+  background:rgba(255,255,255,0.1);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.footer-note{
+  margin-top:30px;
+  padding:20px 24px;
+  background:rgba(255,255,255,0.08);
+  border-radius:16px;
+  font-size:14px;
+  line-height:1.8;
+  text-align:right;
+  border-right:3px solid rgba(255,255,255,0.3);
+}
+.copyright{
+  text-align:center;
+  margin-top:30px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  font-size:13px;
+  opacity:0.7;
+}
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(15,40,35,0.7);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  padding:20px;
+  animation:fadeIn 0.3s ease-out;
+}
+.modal.active{display:flex}
+.modal-content{
+  background:white;
+  border-radius:24px;
+  max-width:700px;
+  width:100%;
+  max-height:85vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  animation:scaleIn 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.modal-header{
+  padding:24px 28px;
+  background:linear-gradient(135deg,var(--teal-deep),var(--teal));
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.modal-title{
+  font-family:'Cairo',sans-serif;
+  font-size:20px;
+  font-weight:700;
+}
+.modal-close{
+  background:rgba(255,255,255,0.2);
+  border:none;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  color:white;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all 0.2s;
+}
+.modal-close:hover{background:rgba(255,255,255,0.35);transform:rotate(90deg)}
+.modal-body{
+  padding:24px;
+  overflow-y:auto;
+}
+.committee-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:20px;
+}
+.committee-tab{
+  padding:8px 16px;
+  background:var(--teal-mist);
+  color:var(--teal-deep);
+  border:none;
+  border-radius:12px;
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.committee-tab:hover{background:var(--teal-soft)}
+.committee-tab.active{background:var(--teal);color:white}
+.student-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.student-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  background:#f7f9f7;
+  border-radius:12px;
+  border-right:3px solid var(--teal-light);
+  transition:all 0.2s;
+}
+.student-item:hover{
+  background:var(--teal-mist);
+  transform:translateX(-3px);
+}
+.student-serial{
+  width:36px;
+  height:36px;
+  background:var(--teal);
+  color:white;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  flex-shrink:0;
+  font-size:14px;
+}
+.student-info{flex:1;text-align:right;min-width:0}
+.student-name{
+  font-weight:600;
+  font-size:15px;
+  margin-bottom:4px;
+  color:var(--text-dark);
+}
+.student-meta{
+  font-size:12px;
+  color:var(--text-muted);
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+}
+.student-meta span{display:inline-flex;align-items:center;gap:4px}
+/* SEARCH RESULTS */
+.result-card{
+  padding:20px;
+  background:linear-gradient(135deg,var(--teal-mist),white);
+  border-radius:16px;
+  border:2px solid var(--teal-soft);
+  margin-bottom:12px;
+  text-align:right;
+}
+.result-name{
+  font-size:18px;
+  font-weight:700;
+  color:var(--text-dark);
+  margin-bottom:10px;
+}
+.result-row{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin:6px 0;
+  font-size:14px;
+  color:var(--text-muted);
+  flex-wrap:wrap;
+}
+.result-tag{
+  display:inline-block;
+  padding:4px 12px;
+  background:var(--teal);
+  color:white;
+  border-radius:8px;
+  font-weight:600;
+  font-size:13px;
+}
+.no-results{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--text-muted);
+}
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@media (max-width:600px){
+  .card{padding:24px 20px}
+  .hero{min-height:50vh;padding:40px 16px 60px}
+  .container{padding:0 14px 40px}
+  .search-input{padding:16px 18px;font-size:15px}
+  .search-btn{width:54px}
+  .modal-body{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="moe-logo">
+    <img src="data:image/png;base64,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" alt="شعار وزارة التعليم">
+  </div>
+  <span class="school-badge">المدرسة الثانوية الثالثة بالخبر للبنات</span>
+  <h1>نظام لجان الاختبار</h1>
+  <p>ابحثي عن لجنتك باستخدام اسمك أو رقم هويتك</p>
+  <button class="cta-btn" onclick="document.getElementById('searchInput').focus();window.scrollTo({top:document.querySelector('.search-card').offsetTop-20,behavior:'smooth'})">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    ابدئي البحث الآن
+  </button>
+  <div class="principal-badge">
+    <span>مديرة المدرسة: أ. منى الزهراني</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  </div>
+</section>
+
+<div class="container">
+  <!-- DISTRIBUTION CARD -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">توزيع اللجان</h2>
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </div>
+    </div>
+    <button class="committee-group grade-1" onclick="openCommittees(1)">أول ثانوي: اللجان 1 - 6 و 19</button>
+    <button class="committee-group grade-2" onclick="openCommittees(2)">ثاني ثانوي: اللجان 7 - 12 و 20</button>
+    <button class="committee-group grade-3" onclick="openCommittees(3)">ثالث ثانوي: اللجان 13 - 18 و 21</button>
+  </div>
+
+  <!-- SEARCH CARD -->
+
+  <div class="card search-card">
+    <div class="card-header">
+      <h2 class="card-title">البحث عن اللجنة</h2>
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+    </div>
+    <div class="search-row">
+      <button class="search-btn" onclick="performSearch()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <input type="text" class="search-input" id="searchInput" placeholder="أدخلي الاسم أو رقم الهوية" oninput="performSearch()">
+    </div>
+    <div id="searchResults" style="margin-top:20px"></div>
+  </div>
+
+  <!-- PRIVACY BADGE -->
+
+  <div class="privacy">
+    <div class="privacy-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  <div class="footer-content">
+    <h3 class="footer-title">فريق العمل</h3>
+    <div class="team-member" style="border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:16px;margin-bottom:8px">
+      <span style="font-weight:600">أ. منى الزهراني - مديرة المدرسة</span>
+      <div class="member-icon" style="background:rgba(255,255,255,0.2)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+    </div>
+    <div class="team-member">
+      <span>أ. رانيه المعيلي - الشؤون الطلابية</span>
+      <div class="member-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+    </div>
+    <div class="team-member">
+      <span>أ. بنان عسيري - مسؤولة النادي الرقمي</span>
+      <div class="member-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+    </div>
+    <div class="team-member">
+      <span>أ. أمل اليوسف - مسجلة المعلومات</span>
+      <div class="member-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+    </div>
+    <div class="footer-note">
+      نظام لجان الاختبار يوفر إمكانية البحث السريع عن معلومات اللجان للطالبات. جميع البيانات محفوظة وآمنة وفقاً لأعلى معايير الخصوصية.
+    </div>
+    <div class="copyright">© 2025 نظام لجان الاختبار</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+
+<div class="modal" id="committeeModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalTitle">اللجان</h3>
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="committee-tabs" id="committeeTabs"></div>
+      <div class="student-list" id="studentList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COMMITTEES = {"1":[{"serial":1,"seat":"111450002","name":"ابرار بنت خالد بن مبارك المسعودي القحطاني","id":"1151360730","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":2,"seat":"111450003","name":"ارين بنت حمود بن عضيب العصيمي العتيبي","id":"1151200977","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":3,"seat":"111450004","name":"البندري بنت فارس بن عبدالحميد البعيجان","id":"1151572771","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":4,"seat":"111450005","name":"الجوهره بنت عبد الرحمن بن خليفه الحنوط","id":"1151669486","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":5,"seat":"111450006","name":"الجوهره بنت علي بن عبدالله المهيمزي الرشيدي","id":"1152905947","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":6,"seat":"111450007","name":"العنود بنت عبدالله بن محمد المزيد","id":"1149700542","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":7,"seat":"111450008","name":"العنود بنت مشعل بن غاشم الجحيشي الشمري","id":"1152473185","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":8,"seat":"111450009","name":"اليسا بنت سعد بن محمد الكناني الزهراني","id":"1156250589","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":9,"seat":"111450010","name":"الين بنت بدر بن سالم الثويعي الفيفي","id":"1150989471","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":10,"seat":"111450011","name":"الين بنت سعود بن فهد شطي السنجاري الشمري","id":"1152631626","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":11,"seat":"111450013","name":"أثير بنت أنس بن صالح الرفاعى","id":"1152568992","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":12,"seat":"111450015","name":"أريج بنت عدنان بن طاهر المحمد","id":"1155334962","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":13,"seat":"111450016","name":"ألين بنت محمد بن هادي آل رغيب","id":"1151652755","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":14,"seat":"111450017","name":"ألين بنت مناحي بن عبيد  العصيمي العتيبي","id":"1160816789","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":15,"seat":"111450018","name":"أمل بنت خلف بن محمد العيافي القحطاني","id":"1151436324","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":16,"seat":"111450019","name":"أمل بنت علي بن سعد الجعيد","id":"1151374715","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":17,"seat":"111450020","name":"أنهار بنت حسين بن علي الدرع","id":"1150065231","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":18,"seat":"111450021","name":"بثينه بنت عبدالله بن ابراهيم الخزيم","id":"1152348403","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":19,"seat":"111450022","name":"بدريه بنت بدر بن عبيد الصقري الشمري","id":"1149718890","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":20,"seat":"111450023","name":"بدور بنت سعيد بن يوسف الذوادي","id":"1157784693","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":21,"seat":"111450024","name":"بلقيس بنت أحمد بن سعيد آل ساتر","id":"1153276173","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":22,"seat":"111450025","name":"بيان بنت سليمان بن بادي البادي","id":"1149107698","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":23,"seat":"111450026","name":"بيلسان بنت احمد بن عايد البقعاوي","id":"1150848404","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":24,"seat":"111450027","name":"تالا بنت ناصر بنت عبدالله العدني","id":"1149868083","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":25,"seat":"111450028","name":"تسنيم بنت محمد بن ابراهيم الزعبي","id":"1152033781","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":26,"seat":"111450029","name":"تولين بنت احمدبن مدهش سعيد","id":"1149798595","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":27,"seat":"111450030","name":"جمانا بنت مشعل بن عبدالله بن خلف العدهان","id":"1151380985","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":28,"seat":"111450031","name":"جمانة بنت عبدالله بن حمد الشامي","id":"1151134341","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":29,"seat":"111450032","name":"جمانة بنت عبدالله بن محمد المرشد","id":"1152052732","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":30,"seat":"111450033","name":"جمانه بنت وليد بن عبدالرحمن بالطيور","id":"1152710453","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":31,"seat":"111450034","name":"جنا بنت طه بن حسين شاهين","id":"1152585038","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":32,"seat":"111450035","name":"جنا بنت عبدالله بن أحمد العياشي الزهراني","id":"1150998159","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":33,"seat":"111450036","name":"جنى بنت أحمد بن عايد المبلع","id":"1150511077","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":34,"seat":"111450038","name":"جنى بنت منصور بن محمد المدني","id":"1153532229","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""}],"2":[{"serial":1,"seat":"111450039","name":"جود بنت ثامر بن علي النعيمي","id":"1152798078","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":2,"seat":"111450040","name":"جود بنت عادل بن سهل السريح العتيبي","id":"1153849524","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":3,"seat":"111450041","name":"جود بنت عبدالغني بن عبدالرحمن الحزيمي","id":"1152622450","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":4,"seat":"111450042","name":"جود بنت فراج بن عيد الغريري الدوسري","id":"1159289410","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":5,"seat":"111450044","name":"جود بنت هايل بن سعد العصيمي العتيبي","id":"1153871049","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":6,"seat":"111450045","name":"جوري بنت خالد بن تركي العنزي","id":"1155099995","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":7,"seat":"111450046","name":"جوري بنت فهد بن زيد ابو تيلي","id":"1162122996","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":8,"seat":"111450047","name":"جوري بنت محمد بن راشد بن فهد العيسى","id":"1153634009","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":9,"seat":"111450048","name":"جوري بنت مطلق بن حديجان الجياش الحارثى","id":"1160874036","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":10,"seat":"111450049","name":"حصه بنت ناصر بن سليمان المنيف","id":"1151330758","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":11,"seat":"111450050","name":"حلا  بنت عبد الرحمن بن ابراهيم بن محمد الجنيد","id":"1152545438","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":12,"seat":"111450051","name":"حلا بنت عبدالله بن سعد العبود","id":"1151277850","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":13,"seat":"111450052","name":"حميده بنت عبدالرحمن بن فالح طرباق","id":"1142719200","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":14,"seat":"111450053","name":"حور بنت عبدالله بن محمد الشهري","id":"1153679087","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":15,"seat":"111450054","name":"حور بنت عبدالله بن نايف الحمدان","id":"1150945614","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":16,"seat":"111450055","name":"حور بنت عواد بن دخيل الله المهيمزي","id":"1154628463","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":17,"seat":"111450056","name":"دانة بنت عبد المحسن بن محمد بالطيور","id":"1153371016","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":18,"seat":"111450058","name":"دانه بنت عوض بن مهدي أل حارث","id":"1152687339","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":19,"seat":"111450059","name":"دانه بنت محمد بن أحمد العبداللطيف","id":"1151417308","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":20,"seat":"111450060","name":"ديم بنت فهد بن سعد الحسين","id":"1152783427","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":21,"seat":"111450061","name":"ديما بنت مراد بن يحي زكري","id":"1156506485","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":22,"seat":"111450062","name":"ديمة بنت موسى بن محمد الحسنى الزهراني","id":"1151208657","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":23,"seat":"111450063","name":"دينا بنت ابراهيم بن خالد الشعوان","id":"1152564777","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":24,"seat":"111450064","name":"دينا بنت خالد بن عطالله الخزيم","id":"1149459503","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":25,"seat":"111450065","name":"ذوق بنت محمد بن علي الشامى","id":"1152179956","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":26,"seat":"111450066","name":"رازان بنت هاني بن عبدالله بايوني العمودي","id":"1165183367","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":27,"seat":"111450067","name":"راما بنت احمد بن حسن بن ضيف  الله مريع","id":"1153215619","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":28,"seat":"111450068","name":"راما بنت احمد بن عثمان بن احمد حكمي","id":"1153713217","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":29,"seat":"111450069","name":"رانسي بنت علي بن احمد ال سعيد الحارثي","id":"1151656079","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":30,"seat":"111450070","name":"رتاج بنت صالح بن هاشل ال بالحارث","id":"1159826203","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":31,"seat":"111450071","name":"رجوى بنت محمد بن صالح آل حيدر","id":"1150154084","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":32,"seat":"111450072","name":"رحمة بنت عبدالكريم بن معتوق آل طه","id":"1157654193","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":33,"seat":"111450073","name":"رزان بنت منصور بن محمد الاحمد","id":"1152227011","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":34,"seat":"111450074","name":"رغد بنت حسن بن عبدالرحيم الحسن","id":"1152082275","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""}],"3":[{"serial":1,"seat":"111450076","name":"رغد بنت سعد بن علي المالح الغامدي","id":"1152099469","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":2,"seat":"111450077","name":"رغد بنت علي بن سالم القحطاني","id":"1150455796","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":3,"seat":"111450078","name":"رغد بنت محمد بن هليل الرباحي المالكي","id":"1151181128","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":4,"seat":"111450079","name":"رهاد بنت محمد بن سعود الشرهان","id":"1152834469","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":5,"seat":"111450080","name":"رهف بنت ابراهيم بن عبدالحي الخالدي","id":"1153902752","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":6,"seat":"111450082","name":"روان بنت بندربن احمد قاضي","id":"1150708871","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":7,"seat":"111450083","name":"روان بنت محمد بن عبدالله الدوسري","id":"1156749416","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":8,"seat":"111450084","name":"رولا بنت عبدالرحمن بن احمد البارقي","id":"1153348105","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":9,"seat":"111450085","name":"رويدا بنت صالح بن علي القحطاني","id":"1152524284","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":10,"seat":"111450086","name":"ريام بنت طلال بن خالد آل سعيد","id":"1153007198","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":11,"seat":"111450087","name":"ريتال  بن محمد بن سعد القحطاني","id":"1149749945","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":12,"seat":"111450088","name":"ريتال بنت عادل بن عبدالله محمد","id":"1150853578","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":13,"seat":"111450089","name":"ريتان بنت صلاح بن ابراهيم الكلبان","id":"1151886171","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":14,"seat":"111450090","name":"ريم بنت بندر بن صالح باصويلح","id":"1149514786","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":15,"seat":"111450091","name":"ريم بنت جمعان بن حسين الهملان القحطانى","id":"1153191448","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":16,"seat":"111450092","name":"ريم بنت فتحي بن علي بن احمد المرزوق","id":"1150611091","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":17,"seat":"111450093","name":"ريم بنت مسفر بن سيف الفهد النعيمي","id":"1149148072","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":18,"seat":"111450094","name":"ريما بنت بدر بن عبدالهادي الميموني","id":"1151178264","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":19,"seat":"111450095","name":"ريما بنت خالد بن عبدالله العوسي","id":"1152044671","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":20,"seat":"111450096","name":"ريما بنت موسى بن محمد القحطاني","id":"1152482814","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":21,"seat":"111450098","name":"ريماس بنت مسعد بن حمد السماحي المنهالي","id":"1157263284","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":22,"seat":"111450099","name":"ريماس بنت نايف بن محمد  ثاني الكويكبي الرويلي","id":"1172173377","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":23,"seat":"111450100","name":"ريناد بنت اسماعيل بن خلف ال ليلح الشهري","id":"1154120883","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":24,"seat":"111450101","name":"ريناد بنت خالد بن فرنيص ال سوسان اليامي","id":"1148817396","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":25,"seat":"111450103","name":"ريهام بنت عبدالاله بن علي بن حمد الدريويش","id":"1152693626","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":26,"seat":"111450104","name":"زهراء بنت عبدالاله بن محمد الدليم","id":"1149701037","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":27,"seat":"111450105","name":"زهراء بنت علي بن حسين العلي","id":"1152677488","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":28,"seat":"111450106","name":"سارة بنت محمد بن صالح العلي","id":"1150371043","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":29,"seat":"111450107","name":"ساره بنت اسامه بن جاسم بو سريح الدوسرى","id":"1150842571","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":30,"seat":"111450108","name":"ساره بنت سلطان بن عبدالهادي بن محمد السلطان","id":"1150255493","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":31,"seat":"111450109","name":"ساره بنت ماجد بن محمد أصغر خان","id":"1152467468","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":32,"seat":"111450110","name":"ساره بنت مبارك بن محمد القحطاني","id":"1153700750","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":33,"seat":"111450112","name":"ساره بنت وليد بن سلمان الموسى","id":"1151030762","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""}],"4":[{"serial":1,"seat":"111450113","name":"ساره علي ابن محمد القحطاني","id":"1153351927","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":2,"seat":"111450114","name":"سديم بنت عبدالله بن احمد المحارفي","id":"1151163399","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":3,"seat":"111450115","name":"سعاد بنت احمد بن عبداللطيف بن احمد الخميس","id":"1152752141","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":4,"seat":"111450116","name":"سلاف بنت زياد بن محمد مدني","id":"1151429824","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":5,"seat":"111450117","name":"سلطانه بنت ناجي بن رجاء الرشيد السديري","id":"1150935995","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":6,"seat":"111450118","name":"سلمى بنت محمود بن مبارك النصيب","id":"1151190228","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":7,"seat":"111450119","name":"سندس بنت محمد بن عبيدالله أحمد","id":"1151860499","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":8,"seat":"111450120","name":"شادن بنت بندر بن محمد ال سنان اليامي","id":"1151405113","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":9,"seat":"111450121","name":"شادن بنت حسين بن ياسين الحلوي","id":"1151537451","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":10,"seat":"111450122","name":"شموخ بنت ناصر بن عبيد بن ناصر مريع","id":"1149823666","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":11,"seat":"111450123","name":"شهد بنت صالح بن علي الحارثي النجراني","id":"1154018707","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":12,"seat":"111450124","name":"شهد بنت علي بن حبيب الحماده","id":"1146292014","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":13,"seat":"111450126","name":"شوق بنت احمد بن عبدالعزيز العوده","id":"1153791551","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":14,"seat":"111450127","name":"شيخه بنت عبدالرحمن بن فالح طرباق","id":"1146781842","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":15,"seat":"111450128","name":"صبا بنت عبدالكريم بن عبدالمحسن الهريش التميمي","id":"1153537269","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":16,"seat":"111450129","name":"صفاء بنت محمد بن عبداللطيف العرفج","id":"1153213887","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":17,"seat":"111450130","name":"طاهرة بنت حسين بن عباس العقيلي","id":"1151052949","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":18,"seat":"111450131","name":"عائشه بنت عبدالهادي بن محمد آل كعدان القحطاني","id":"1153159353","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":19,"seat":"111450132","name":"غاده بنت يوسف بن عبدالله ال بويت الفضلي","id":"1149955724","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":20,"seat":"111450133","name":"غزلان بنت عادل بن مبارك النصيب","id":"1151724729","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":21,"seat":"111450134","name":"غلا بنت خليل بن ابراهيم العبداللطيف","id":"1151805726","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":22,"seat":"111450135","name":"غلا بنت عبدالله بن فهد الغفيلي الشمري","id":"1153715493","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":23,"seat":"111450137","name":"غنى بنت علي بن فريد آل جذيم اليامي","id":"1151141080","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":24,"seat":"111450138","name":"فاطمة بنت حجي بن احمد الصالح","id":"1157054162","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":25,"seat":"111450139","name":"فاطمة بنت علي بن حيدر آل اسعد","id":"1151435631","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":26,"seat":"111450140","name":"فاطمة بنت كمال بن جعفر الشبركه","id":"1152844229","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":27,"seat":"111450141","name":"فاطمه بنت سعيد بن علي اليماني","id":"1151806104","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":28,"seat":"111450142","name":"فاطمه بنت سلطان بن سرور الروق القحطاني","id":"1151633359","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":29,"seat":"111450143","name":"فاطمه بنت عبدالله بن حمد الخالدي","id":"1152291082","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":30,"seat":"111450144","name":"فاطمه بنت وليد بن احمد العبود","id":"1151816483","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":31,"seat":"111450145","name":"فجر بنت سامي بن عمر عطيه","id":"1150741617","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":32,"seat":"111450146","name":"فجر بنت طارق بن محمد بن خميس","id":"1149972034","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":33,"seat":"111450147","name":"فرح بنت حمد بن بشير العميري","id":"1163170044","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""}],"5":[{"serial":1,"seat":"111450149","name":"فيروز بنت سالم بن سعيد الكناني الزهراني","id":"1150393252","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":2,"seat":"111450150","name":"قمر بنت محمد بن سعيد القحطاني","id":"1151951546","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":3,"seat":"111450151","name":"لانا بنت سعد بن محمد آل مانع القحطاني","id":"1152983704","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":4,"seat":"111450152","name":"لانا عوض بن احمد الاحمري","id":"1156173161","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":5,"seat":"111450153","name":"لتين بنت حاتم بن علي المسلم","id":"1151734694","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":6,"seat":"111450154","name":"لجين بنت احمد بن محمد ال فحلان الاسمري","id":"1150316410","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":7,"seat":"111450155","name":"لجين بنت علي بن أحمد بن حسين بجوي","id":"1150610499","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":8,"seat":"111450156","name":"لجين بنت عوده بن عبدالله آل بويت الفضلي","id":"1155029430","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":9,"seat":"111450157","name":"لجين عيسى معيض مريع","id":"1151290796","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":10,"seat":"111450158","name":"لمار بنت حسن بن محمد اليوسي الشهري","id":"1151184403","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":11,"seat":"111450159","name":"لمار بنت صالح بن احمد آل خاطر الغامدي","id":"1150163705","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":12,"seat":"111450160","name":"لمار بنت مازن بن صالح العبيد","id":"1153266687","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":13,"seat":"111450161","name":"لمار بنت محمد بن حياالله الشهري","id":"1152308084","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":14,"seat":"111450162","name":"لمى بنت علي بن محمد الجرابعه المري","id":"1152679757","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":15,"seat":"111450163","name":"لمى بنت محمد بن عمر حلواني","id":"1153115744","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":16,"seat":"111450164","name":"لمى بنت ناصر بن محمد آل ناصر القحطاني","id":"1152013163","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":17,"seat":"111450165","name":"لمى محمد عيسى الحسن","id":"1149857128","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":18,"seat":"111450166","name":"ليان بنت خالد بن عوض بن زقر","id":"1153281439","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":19,"seat":"111450167","name":"ليان بنت صالح بن سعيد آل رفيدي الاحمرى","id":"1153159049","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":20,"seat":"111450168","name":"ليان بنت عصام بن احمد العبود","id":"1150034864","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":21,"seat":"111450169","name":"ليان بنت فالح بن فهد العاصمي القحطاني","id":"1153204779","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":22,"seat":"111450170","name":"ليان بنت هادي بن عبيد الحماد","id":"1163612730","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":23,"seat":"111450171","name":"لين بنت خالد بن عبدالله الصرعاوي","id":"1150534087","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":24,"seat":"111450173","name":"لين بنت صالح بن عبدالكريم أباحسين","id":"1151431861","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":25,"seat":"111450175","name":"لينا بنت علي بن سعيد المازني العسيري","id":"1149465823","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":26,"seat":"111450177","name":"مريم بنت احمد بن خليفه الوسمي","id":"1152901458","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":27,"seat":"111450178","name":"مريم بنت أحمد بن سالم بن أحمد حصريم","id":"1153485659","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":28,"seat":"111450180","name":"مريم بنت عبدالرحمن بن جمعه الدوسري","id":"1171091810","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":29,"seat":"111450182","name":"منال بنت أحمد بن صالح الدرعة","id":"1152250120","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":30,"seat":"111450183","name":"منى بنت مهنا بن سالم المشعان","id":"1151270749","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":31,"seat":"111450184","name":"منيرة احمد عبدالعزيز سليمان","id":"2408458806","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":32,"seat":"111450185","name":"منيرة بنت محمد بن سعود الأزيمع","id":"1175976586","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":33,"seat":"111450186","name":"مها بنت خالد بن عوض القحطاني","id":"1165610286","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""}],"6":[{"serial":1,"seat":"111450012","name":"انين بنت حبيب بن حسين العامر","id":"1123727925","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":2,"seat":"111450014","name":"أحلام بنت محمد بن زيد الخضير","id":"1076803467","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":3,"seat":"111450102","name":"ريناد بنت صالح بن حامد السليمي الحربي","id":"1139635674","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":4,"seat":"111450111","name":"ساره بنت محمد بن سالم الهاجري","id":"1050520780","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":5,"seat":"111450174","name":"لين بنت طلال بن محمد الطويرقي","id":"1149862540","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":6,"seat":"111450179","name":"مريم بنت سويد بن حسين غزواني","id":"1077107595","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":7,"seat":"111450187","name":"موضي بنت عبدالله بن مبارك آل كليب","id":"1158538783","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":8,"seat":"111450188","name":"ميرال بنت عبدالله بن محمد الهويمل","id":"1151655055","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":9,"seat":"111450189","name":"ميسر بنت ناصر بن محمد المحيميد","id":"1149073304","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":10,"seat":"111450190","name":"نادين بنت ابراهيم بن سعد آل شائع","id":"1152278683","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":11,"seat":"111450191","name":"نبيله بنت محمد بن شايق الحربي","id":"1148269820","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":12,"seat":"111450192","name":"نجود بنت فهيد بن عوض وهبي الحربي","id":"1150447785","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":13,"seat":"111450193","name":"نظر بنت أحمد بن عبدالله اللقماني الحربي","id":"1151931670","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":14,"seat":"111450194","name":"نعيمه بنت راشد بن فايز الجبيري البيشي","id":"1155993114","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":15,"seat":"111450195","name":"نعيمه بنت نايف بن عبدالرحمن المذن","id":"1151143383","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":16,"seat":"111450196","name":"نور بنت صلاح بن محمد بن بوكر آيوب","id":"1151460159","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":17,"seat":"111450197","name":"نورة بنت بدر بن حمدان العنزي","id":"1151073598","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":18,"seat":"111450198","name":"نورة بنت مسلي ابن حسن ال عاطف القحطاني","id":"1149559039","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":19,"seat":"111450199","name":"نوره بنت احمد بن انور النهدي","id":"1153437866","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":20,"seat":"111450200","name":"نوره بنت تركي بن محمد الجروى القحطاني","id":"1151551866","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":21,"seat":"111450201","name":"نوره بنت سعد بن سعيد آل مفرج القحطاني","id":"1149827899","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":22,"seat":"111450202","name":"نوره بنت عبدالله بن محمد السديري","id":"1152686471","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":23,"seat":"111450203","name":"نوف بنت محمد بن عثمان الحزيم","id":"1153009665","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":24,"seat":"111450204","name":"نوف بنت نايف بن خالد المسعود","id":"1146784143","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":25,"seat":"111450205","name":"هديل بنت سلطان بن مطر الحبلاني العنزي","id":"1153678816","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":26,"seat":"111450206","name":"هناء بنت مقرن بن مبارك الهندي الخالدي","id":"1156031005","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":27,"seat":"111450207","name":"هيا بنت سعد بن صالح الدموخ الدوسري","id":"1154049165","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":28,"seat":"111450208","name":"هيا بنت صالح بن علي السليم","id":"1151783634","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":29,"seat":"111450209","name":"هيا بنت وليد بن احمد ابابطين","id":"1150791026","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":30,"seat":"111450210","name":"وضحه بنت سلطان بن غازي السماعيل الظفيري","id":"1150515235","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":31,"seat":"111450211","name":"يارا بنت فيصل بن نايف القريشي السبيعي","id":"1151532262","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":32,"seat":"111450212","name":"يارا بنت ماجد بن عجاب المطيري","id":"1152573505","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":33,"seat":"111450213","name":"ياسمين بنت عبدالله بن صالح بن نفيع العزيزي المطيري","id":"1149970194","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""}],"7":[{"serial":1,"seat":"121600001","name":"آمنة بنت مطر بن عبدالله الزكرتي","id":"1145671093","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"121600002","name":"الجوري بنت عبداللطيف بن صالح العبداللطيف","id":"1145936496","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"121600003","name":"الجوهرة بنت تركي بن فيصل الدوسري","id":"1149157800","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"121600004","name":"الجوهره بنت عبد الحكيم بن عبدالله بن عبد الهادي آل سعد القحطاني","id":"1146897317","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"121600005","name":"الجوهره بنت عبدالعزيز بن مشاري الهزاني","id":"1145702930","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"121600006","name":"الجوهره بنت مشعل بن محمد الهندي الخالدي","id":"1147528853","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"121600007","name":"الماس بنت بدر بن سعد الدوسري","id":"1146755648","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"121600008","name":"الهام بنت احمد بن يوسف الصومالي","id":"1157701283","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"121600009","name":"الهنوف بنت نايف بن بدر المسعري الدوسري","id":"1145414866","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"121600010","name":"ايلان بنت زاهر بن محمد الحزام الشهري","id":"1146353113","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"121600011","name":"أصايل بنت خالد بن عيسى الذوادي الدوسري","id":"1148334756","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"121600013","name":"بدرية بنت عبدالعزيز بن سالم الناصر","id":"1151651294","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"121600014","name":"بدرية بنت فراج بن مجهار الدوسري","id":"tjza$14272196","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"121600015","name":"بهيه بنت عماد بن عبدالعزيز الحمام","id":"1149181438","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"121600016","name":"بيان بنت محمد بن احمد آل بن على","id":"1147738767","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"121600017","name":"بيلسان بنت سعود بن صالح  شرمان ال الحارث","id":"1147457566","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"121600018","name":"جمانة بنت محمد بن علي الاحمري","id":"1150342622","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"121600019","name":"جمانة بنت معاذ بن محمد حلواني","id":"1146453822","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"121600020","name":"جمانه بنت عمر بن عبدالعزيز الزهيران الزعبي","id":"1147700718","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"121600021","name":"جنى بنت بكر بن حميدي الخطابي","id":"1149098616","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"121600022","name":"جنى بنت محمد بن عبداللطيف العبداللطيف","id":"1144793906","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"121600023","name":"جنى بنت محمد بن عبدالله باسميح","id":"1147806325","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"121600024","name":"جنى بنت مصطفى بن عدنان المدنى","id":"1145543771","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"121600025","name":"جوان بنت محمد بن هليل الرباحي المالكي","id":"1146839830","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"121600026","name":"جود بنت خير الله بن تركي الحسني العنزي","id":"1149587931","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"121600027","name":"جود بنت عبدالله بن عبدالعزيز الغنام","id":"1148825183","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"121600028","name":"جود بنت فهد بن سليمان الفوزان","id":"1146977994","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"121600029","name":"جودي بنت يونس بن مشبب ال حميل العمري","id":"1154204471","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"121600030","name":"جوري بنت أنس بن محمد جفري","id":"1146483670","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"121600032","name":"جوري بنت محمد بن حسن بن محمد مقطافي شبيلي","id":"1145604995","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"121600033","name":"جوري بنت هايل بن سعد العصيمي العتيبي","id":"1146607948","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"121600034","name":"جوهرة بنت سامي بن مانع آل شملان","id":"1169379821","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"121600035","name":"حصة بنت عماد بن محمد بن سيف العواد","id":"1147156374","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"121600036","name":"حصه بنت فيصل بن سعد بالخزمر الزهراني","id":"1148080896","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"121600037","name":"حلا بنت عبدالعزيز بن محمد القرون","id":"1146162431","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"121600038","name":"حلا بنت عبدالله بن صالح المزيعل","id":"1148722026","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":37,"seat":"121600039","name":"حنين بنت محمد بن عايش الكويتي","id":"1147355562","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":38,"seat":"121600040","name":"حنين بنت وليد بن احمد القميح","id":"1151184825","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":39,"seat":"121600041","name":"حور بنت أحمد بن عبدالله النغيثر","id":"1147550907","grade":"الثاني الثانوي","section":"المسار العام","notes":""}],"8":[{"serial":1,"seat":"121600042","name":"حور بنت يحى بن احمد ال خليل الشيخي","id":"1147142168","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"121600044","name":"دانة بنت عبدالله بن خليفه الوسمي","id":"1148182916","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"121600045","name":"دلال بنت مبارك بن وسمي الوسمي","id":"1147794208","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"121600046","name":"دنيا بنت ابراهيم بن محمد آل رشيد القحطاني","id":"1146627391","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"121600047","name":"ديما بنت محمد بن عبدالله الثوري السبيعي","id":"1146864317","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"121600048","name":"ديما بنت نايف بن سعيد آل الزبيري القحطاني","id":"1145818504","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"121600049","name":"راما بنت أسامة بن عبدالله بن سالم الصائغ","id":"1148379520","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"121600050","name":"راما بنت سالم بن حمد المخلفي الحربي","id":"1148278953","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"121600052","name":"ربى بنت موسى بن حمدان بن محمد ال حامد العمري","id":"1148188186","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"121600053","name":"رسل بنت محمد بن عبدالجليل الفضل","id":"1146633480","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"121600054","name":"رسماء بنت سعيد بن مبارك الدوسري","id":"1144597265","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"121600055","name":"رغد ابراهيم بن سعيد بن عتمه","id":"1146425283","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"121600056","name":"رغد بنت ثامر بن علي الفهد النعيمي","id":"1146440373","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"121600057","name":"رغد بنت خالد بن محمد الفواز","id":"1147317729","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"121600058","name":"رغد بنت عبدالله بن سيف الجودل الخالدي","id":"1147469074","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"121600059","name":"رغد بنت علي بن بشير السكيبي","id":"1149074377","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"121600060","name":"رغد بنت فيصل بن عبدالله الصالح","id":"1146068869","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"121600061","name":"رغد بنت فيصل بن محمد بن ظفير","id":"1146201890","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"121600062","name":"رغد بنت منصور بن عبدالرحمن ال سالم الدوسري","id":"1151429949","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"121600064","name":"رنا بنت سعد بن مرزوق الهندي النجراني","id":"1146031594","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"121600065","name":"رند بنت سالم بن راكان الدوسري","id":"1152456966","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"121600066","name":"رنيم بنت سعود بن عبدالله الاكلبي البيشي","id":"1149272898","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"121600067","name":"رنيم بنت شرقي بن محمد الرشده القرني","id":"1146270622","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"121600068","name":"رنيم بنت عادل بن سالم بن محمد المري","id":"1142706728","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"121600069","name":"رنيم بنت عبدالله بن سلمان الصقر","id":"1145696710","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"121600070","name":"رنيم بنت عبدالله بن ظافر ال جزاع الدوسري","id":"1150014825","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"121600071","name":"رنيم بنت محمد بن يحي معكفي عواجي","id":"1148666298","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"121600072","name":"رهف بنت حسين بن أحمد الشريده","id":"1148322009","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"121600073","name":"رهف بنت عادل بن سهل السريح العتيبي","id":"1149000646","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"121600074","name":"رهى بنت خالد بن محمد المسلم","id":"1146042666","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"121600075","name":"روز بنت سمير بن احمد البوق","id":"1147026734","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"121600076","name":"روزا بنت ماجد بن عجاب العقيلي المطيري","id":"1146388614","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"121600077","name":"ريتاج بنت بدر بن عوض وهبي الحربي","id":"1146665490","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"121600078","name":"ريلام بنت محمد بن احمد بن علي الناصر","id":"1150090379","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"121600079","name":"ريم بنت عيسى بن احمد الحبيب","id":"1151628490","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"121600080","name":"ريم بنت فهد بن علي السبعان","id":"1173725514","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":37,"seat":"121600081","name":"ريم بنت محمد بن على الذبياني الجهنى","id":"1147998627","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":38,"seat":"121600082","name":"ريم بنت مفلح بن عبدالهادي الغريري الدوسري","id":"1145776132","grade":"الثاني الثانوي","section":"المسار العام","notes":""}],"9":[{"serial":1,"seat":"121600083","name":"ريم بنت مهدي بن احمد شويهي","id":"1147459521","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"121600084","name":"ريم بنت يوسف بن محمد التميمي","id":"1146412075","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"121600085","name":"ريما بنت ابراهيم بن رجاء السحيمي القحطاني","id":"1146547128","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"121600086","name":"ريما بنت محمد بن علي المالحي الزهراني","id":"1143203915","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"121600087","name":"ريماس بنت خالد بن محمد العصلاني","id":"1154638603","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"121600088","name":"ريمان بنت صالح بن أحمد المغلوث","id":"1149414854","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"121600089","name":"ريناد بنت صالح بن سعيد آل جعفر الغامدي","id":"1147534117","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"121600090","name":"ريناد بنت مبارك بن سعد بن مبارك الشمشير","id":"1147688954","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"121600092","name":"زينب بنت حمزه بن طاهر الناصر","id":"1147687659","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"121600093","name":"سارا بنت محمد بن فهاد الدرعان","id":"1149944884","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"121600094","name":"سارة بنت حسين بن مبارك آل زايد الهاجري","id":"1148915232","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"121600095","name":"سارة بنت عبدالعزيز بن عبدالرحمن المغيربي","id":"1150735346","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"121600096","name":"ساره بنت خليفه بن ابراهيم الهشوم","id":"1146237688","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"121600097","name":"ساره بنت عبدالله بن سعد ال منصور القحطاني","id":"1164183962","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"121600098","name":"ساره بنت علي بن عيسى الحميدي","id":"1145889943","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"121600099","name":"سديم بنت فؤاد بن جمعه المحمد صالح","id":"1147395055","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"121600100","name":"سدين بنت خالد بن محمد الربيع","id":"1149388488","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"121600101","name":"سعيدة بنت حسن بن علي بن خاله العمري","id":"1147378994","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"121600102","name":"سلاف بنت حاتم بن راشد الزريق","id":"1145912729","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"121600103","name":"سلاف بنت عبدالعزيز ابن حسن آل زاهر القحطاني","id":"1149563627","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"121600104","name":"سيدرا بنت زياد بن محمد عيسى مدني","id":"1147411365","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"121600105","name":"سيرين بنت مبشر بن محمد الكعبي العمري","id":"1145695076","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"121600106","name":"شادن بنت صالح بن محمد القرني","id":"1149249805","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"121600107","name":"شادن بنت مطلق بن حديجان الجياش الحارثى","id":"1146782543","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"121600108","name":"شذى بنت محمد بن علي الفضلي","id":"1146956253","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"121600109","name":"شعاع بنت عبد العزيز بن عبدالله العلوي الحربي","id":"1146939119","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"121600110","name":"شهد بنت ادريس بن احمد حسن","id":"1147103582","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"121600111","name":"شهد بنت عبدالرحمن بن عيسي الحساوي","id":"1145197404","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"121600112","name":"شهد بنت عبدالمحسن بن جاسم العثمان","id":"1150371142","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"121600113","name":"شهد بنت يوسف بن احمد المحيميد السهلي","id":"1148490715","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"121600114","name":"شوق بنت صالح بن عبدالخالق الجويبر","id":"1148073073","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"121600115","name":"شوق بنت علي ابن عبدالله الجمعه","id":"1148674045","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"121600116","name":"شيخه بنت فهد بن مترك الرجباني الدوسري","id":"1149068072","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"121600117","name":"شيماء بنت عبدالرحمن بن محمد الخميس","id":"1146352743","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"121600118","name":"صبا بنت فوزي بن على بن الخلف الغامدي","id":"1148176538","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"121600119","name":"ضحى بنت ناصر بن عبدالله الصقور","id":"1150287546","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":37,"seat":"121600120","name":"عائشة بنت احمد بن عبدالله الدحيم","id":"1147283582","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":38,"seat":"121600121","name":"عالية بنت فهد بن عبدالعزيز بن محمد الصقر","id":"1148526856","grade":"الثاني الثانوي","section":"المسار العام","notes":""}],"10":[{"serial":1,"seat":"121600122","name":"عاليه بنت سعد بن عطاالله الوهبي الحربي","id":"1145209555","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"121600123","name":"عبير بنت محمد بن يوسف ديريه","id":"1147189458","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"121600124","name":"علا بنت مصطفى بن احمد بن الياسين الصليبيخ","id":"1145013205","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"121600125","name":"عليا بنت هاني بن عبدالكريم الحسن","id":"1146780414","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"121600126","name":"علياء بنت محمد بن ابراهيم المشرف","id":"1154234197","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"121600127","name":"غزال بنت خالد بن محمد العلوي الحربي","id":"1149120980","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"121600128","name":"غزل بنت فهد بن عبدالرحمن المقرن","id":"1149401679","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"121600129","name":"غلا بنت بدر بن حجي ابومهناء","id":"1148553306","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"121600130","name":"غلا بنت خالد بن مشرف الكريمي العمرى","id":"1147941676","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"121600131","name":"غلا بنت سيف بن شعوان المقاطي العتيبي","id":"1148745860","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"121600132","name":"غلا بنت فهد بن محمد المرشد","id":"1148466277","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"121600133","name":"غنى بنت علي بن عبدالله المهيمزي الرشيدي","id":"1148555939","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"121600134","name":"فاتن بنت هزاع بن ذكار الصفراء البقمي","id":"1145758361","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"121600135","name":"فاطمة بنت جميل بن حسين العلي","id":"1146727662","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"121600136","name":"فاطمة بنت سامي بن عبد المجيد الامير","id":"1147705758","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"121600137","name":"فاطمة بنت فهيد بن ناصر القحطاني","id":"1149262436","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"121600139","name":"فاطمة بنت يحيى بن سلمان الصقر","id":"1148039157","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"121600140","name":"فاطمه بنت خالد بن سبيت الخالد الخالدي","id":"1146235302","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"121600141","name":"فاطمه بنت مهدي بن مدشوش الطالبي الغامدي","id":"1137529606","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"121600143","name":"فجر بنت عبدالله بن قاسم الهندي الخالدي","id":"1148772526","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"121600144","name":"فرح بنت صالح بن ناصر الفدعاني العنزي","id":"1148947656","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"121600145","name":"فرح بنت محمد بن حسين الفلاح","id":"1146750771","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"121600146","name":"فوزه بنت بدر بن عبيد الصقري الشمري","id":"1144876883","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"121600147","name":"فوزية بنت وليد بن حمد الدعيلج","id":"1146672538","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"121600148","name":"قنوت بنت حسين بن علي المكحل","id":"1148334178","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"121600149","name":"لارا بنت عبدالرحمن بن عبداللطيف العماني","id":"1147740623","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"121600150","name":"لانا بنت حمد بن جابر آل نصيب","id":"1159473873","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"121600151","name":"لانا بنت طراد بن شليل الغيداني الحربي","id":"1143397766","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"121600152","name":"لانا بنت ظيف الله بن محمد الأحمري","id":"1145601918","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"121600153","name":"لانا بنت علي بن صالح ال هشبول الغامدي","id":"1141576262","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"121600154","name":"لجين بنت حسن بن احمد حمدي","id":"1147950792","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"121600155","name":"لجين بنت حسن بن محمد الراشد","id":"1146048267","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"121600156","name":"لجين بنت وليد بن عبدالرحمن بالطيور","id":"1149812511","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"121600157","name":"لطفيه بنت فضل بن عبدالله الغروي","id":"1148781899","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"121600158","name":"لطيفة بنت فهد بن ابراهيم الراجح","id":"1146561905","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"121600159","name":"لطيفة بنت فيصل بن عبدالله الفضلي","id":"1149011361","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":37,"seat":"121600160","name":"لمار بنت صلاح بن ابراهيم اللقمان","id":"1147246555","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":38,"seat":"121600161","name":"لمار بنت محمد بن حسن قاضي","id":"1147193427","grade":"الثاني الثانوي","section":"المسار العام","notes":""}],"11":[{"serial":1,"seat":"121600162","name":"لمى بنت سامي بن احمد العرفج","id":"1148278144","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"121600163","name":"لمى بنت مبارك بن محمد الراشد","id":"1157911981","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"121600164","name":"لولوه بنت باسل بن علي العباس","id":"1147190084","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"121600165","name":"لولوه بنت عبدالله بن عبدالرحمن السماعيل","id":"1144938139","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"121600166","name":"لولوه بنت ماجد بن نوران العازمي","id":"1149614081","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"121600167","name":"لولوه بنت وائل بن سعد العبدوه","id":"1149193540","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"121600168","name":"ليان بنت سليمان بن مطلق الحناكي","id":"1145779805","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"121600169","name":"ليان بنت شايع بن عبدالعزيز ابن حمدان الوسمى","id":"1148147786","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"121600170","name":"ليان بنت صلاح بن ناصر الزير","id":"1144825278","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"121600171","name":"ليان بنت عبيد بن بداح آل مسعود القحطانى","id":"1148923392","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"121600172","name":"ليان بنت علي بن محمد  الجرابعه المري","id":"1146307291","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"121600173","name":"ليان بنت فيصل بن عبدالله ابوسريح الدوسري","id":"1147970717","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"121600174","name":"ليان بنت مشعل بن راشد الدحيم","id":"1148759747","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"121600175","name":"ليان عبدالله عايض المطيري","id":"1146655707","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"121600176","name":"لين بنت عبدالعزيز بن عبداللطيف العرفج","id":"1148856105","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"121600177","name":"لينا بنت خالد بت علي الدعجاني العتيبي","id":"1146186257","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"121600178","name":"لينا بنت سعد بن نابت ال بخات الشهراني","id":"1148810896","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"121600179","name":"مرام بنت فهد بن حسين بن عامر ال مستنير","id":"1150151668","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"121600180","name":"مرام بنت محمد بن أحمد آل وبران","id":"1147194920","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"121600181","name":"مران بنت نواف بن محمد الحسن","id":"1159236973","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"121600182","name":"مرح بنت محمد بن سعيد آل بدوي القحطاني","id":"1147825689","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"121600183","name":"مريم بنت عبدالكريم بن فهد مبارك النهيان","id":"1149207613","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"121600184","name":"مريم بنت عبدالله بن سالم آل بدر الراشدي","id":"1150799821","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"121600185","name":"مريم بنت مساعد بن احمد بن ابراهيم السليم","id":"1147449936","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"121600186","name":"مريم بنت منذر بن محمد نور العبدالرحمن","id":"1148989062","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"121600187","name":"مسك بنت ماجد بن عبدالله باعاصم","id":"1150073730","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"121600188","name":"مشاعل بنت سالم بن مسفر العرجاني العجمي","id":"1149138255","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"121600189","name":"ملاذي بنت مشعل بن عبيد بن زاير النفيعي العتيبي","id":"1147147456","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"121600190","name":"منى احمد محمد ميرةمرداد","id":"1156964932","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"121600191","name":"منيرة بنت ماجد بن محمد الخالدي","id":"1154804627","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"121600192","name":"منيره بنت سعود بن عبدالعزيز المقهوي","id":"1160195820","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"121600193","name":"منيره بنت محمد بن صالح التميمي","id":"1150837225","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"121600195","name":"ميار بنت عيسى بن ابراهيم الشوقبي العسيري","id":"1149408393","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"121600196","name":"ميار بنت فهد بن علي جردي مدخلي","id":"1149366781","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"121600197","name":"ميس بنت هيثم بن سالم بن محفوظ","id":"1146095607","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"121600198","name":"ميساء بنت عبدالرحمن بن محمد بن مصلح المزنعي النجراني","id":"1145923981","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":37,"seat":"121600199","name":"نادين بنت عدنان بن اسماعيل مدني","id":"1137448781","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":38,"seat":"121600200","name":"نجلاء بنت محمد بن حسين بن ضلع السبيعي","id":"1150851226","grade":"الثاني الثانوي","section":"المسار العام","notes":""}],"12":[{"serial":1,"seat":"121600043","name":"خيره خلوفه ابراهيم مذكور","id":"1110204375","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"121600051","name":"راويه بنت محمد بن عبدالله بن علي آل عرار الاسمري","id":"1163191552","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"121600063","name":"رفعة بنت مبارك بن سعد آل عويمر الدوسري","id":"1134564309","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"121600194","name":"مها بنت وليد  بن عبدالله الهندي الخالدي","id":"1148559451","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"121600201","name":"ندى بنت عايض بن سياف الهزري الاكلبي","id":"1146300056","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"121600202","name":"نرجس بنت عبدالعظيم بن ابراهيم العبدالله","id":"1147548729","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"121600203","name":"نروين بنت محمد بن ابن سعد الحميد","id":"1148452509","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"121600204","name":"نعمه بنت جعفر بن علي العبدي الشمري","id":"1147468738","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"121600205","name":"نعيمه بنت عبدالله بن عبدالعزيز البطيح","id":"1155217084","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"121600206","name":"نورة بنت حسين بن علي الزريق","id":"1148285784","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"121600207","name":"نورة بنت رياض بن حربي الصبيحي الخالدي","id":"1147402463","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"121600208","name":"نورة بنت عبدالرحمن بن حمد الصويغ","id":"1147938961","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"121600209","name":"نورة بنت محمد بن فريح  السحيمي القحطاني","id":"1170168361","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"121600210","name":"نوره بنت حمدان بن عبد العزيز الراشد","id":"1149047860","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"121600211","name":"نوره بنت سعد بن فهيد آل بريك الدوسري","id":"1149226837","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"121600212","name":"نوره بنت سمير بن عبدالرحمن المصنوع الدوسري","id":"1147462186","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"121600213","name":"نوره بنت عبدالهادي بن نمر النمر الدوسري","id":"1149236224","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"121600214","name":"نوره بنت لاهوم بن راشد آل شريم المري","id":"1144132873","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"121600215","name":"نوره بنت ياسر بن علي ال حثول القحطاني","id":"1147228942","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"121600216","name":"نوف بنت شاكر بن علي الفوزان","id":"1159597002","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"121600217","name":"هالة بنت علي بن فهد القحطاني","id":"1146693724","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"121600218","name":"هدى بنت عبدالله بن سالم ال سلمان القحطاني","id":"1150070512","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"121600219","name":"هند بنت مصطفى بن محمد ساني","id":"1162717647","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"121600220","name":"هويدا بنت صالح بن علي آل رشود القحطاني","id":"1148094947","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"121600221","name":"هيا بنت عادل بن عبدالرحمن الصانع","id":"1148001835","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"121600222","name":"هياء بنت عمر بن عايض قبطى","id":"1144426366","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"121600223","name":"هياء بنت فيصل بن سعد السالم","id":"1152265300","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"121600224","name":"هيفاء بنت حسين بن علي الصمله السبيعي","id":"1145813109","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"121600225","name":"هيفاء بنت ناصر بن فهد آل فهد النعيمي","id":"1147392052","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"121600226","name":"وضحى بنت سالم بن مبارك العلي","id":"1152264550","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"121600227","name":"وضحى بنت سعد بن محمد المرزوق","id":"1148940644","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"121600228","name":"وعد بنت رامي بن عبده صفحي","id":"1168123683","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"121600229","name":"ولاء بنت أحمد بن ابراهيم التريكي","id":"1143663811","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"121600230","name":"يارا بنت حسين بن سعد آل جبل الاسمري","id":"1145596837","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"121600231","name":"يارا بنت فهد بن عبدالله سبيله العنزي","id":"1146060866","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"121600232","name":"يارا بنت مسفر بن مشبب ال مشبب القحطاني","id":"1148659210","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":37,"seat":"121600233","name":"يارا بنت ناصر بن علي آل مشرف اليامي","id":"1145117048","grade":"الثاني الثانوي","section":"المسار العام","notes":""}],"13":[{"serial":1,"seat":"131600001","name":"ابتسام بنت عويد بن ركا المويهي المطيري","id":"1141612703","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"131600002","name":"اريان بنت يحيى بن محمد آل شرفان الشهري","id":"1145133268","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"131600003","name":"افنان بنت عبدالله بن عايش العوفي","id":"1147036675","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"131600004","name":"الجوري بنت عبدالله بن صالح العزيزي المطيري","id":"1144594817","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"131600005","name":"الجوهره بنت مساعد بن مطلق بن مبارك العياده","id":"1145409080","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"131600006","name":"الجوهره بنت يوسف بن عبدالعزيز البكر","id":"1146680242","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"131600007","name":"الريم بنت عبدالرزاق بن احمد الصمله السبيعي","id":"1140828185","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"131600008","name":"السلطانه بنت عبدالهادي بن محمد آل كعدان القحطاني","id":"1142359908","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"131600009","name":"الكادي بنت تركي بن علي هزازي","id":"1142857638","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"131600010","name":"المها بنت محمد بن ابراهيم الهويمل","id":"1146421688","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"131600012","name":"الين بنت يحي بن صالح الزهراني","id":"1159435567","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"131600013","name":"امنة بنت خالد بن اديب ابو راسم","id":"1142643459","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"131600014","name":"امنه بنت مانع بن محمد الشبوي القحطاني","id":"1138511660","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"131600016","name":"أبرار بنت سعد بن عبدالعزيز المقري","id":"1143857595","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"131600017","name":"أجوان بنت سلطان بن عطيه الوهوب الحربي","id":"1144891924","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"131600018","name":"أسيل بنت راكان بن ناصر آل راكان الدوسري","id":"1144123054","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"131600019","name":"ألمى بنت عبدالله بن محمد العبيدي","id":"1142459526","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"131600020","name":"أنفال بنت خالد بن احمد العامري الشمراني","id":"1144402888","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"131600021","name":"أنوار بنت محمد بن علي المقعدي","id":"1143293650","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"131600022","name":"بسمه بنت خالد بن علي الغماس","id":"1142721867","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"131600023","name":"بشائر طه محمد حمود ناصر","id":"9683617120","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"131600024","name":"بنين بنت عبدالله بن حسين الحصار","id":"1144593165","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"131600025","name":"بيلسان بنت محمد بن احمد بوعبيد","id":"1145808331","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"131600026","name":"تالا بنت زايد بن سعد آل زايد القرني","id":"1143905519","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"131600027","name":"جادل بنت ماجد بن حمد آل سوار","id":"1144443015","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"131600028","name":"جمانه بنت مسفر بن بجاد المطيري","id":"1143587770","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"131600029","name":"جنا بنت علي بن حسن العمري","id":"1141351963","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"131600030","name":"جنا عامر سالم هلابي المري","id":"2269195372","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"131600031","name":"جنى بنت خالد بن عوض ال حسن القحطاني","id":"1165610138","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"131600032","name":"جنى بنت عمر بن عبدربه فريد","id":"1187764293","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"131600033","name":"جنى بنت عوده بن عبدالله الفضلي","id":"1155029372","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"131600035","name":"جنى حسام محمد المقايس","id":"2306369600","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"131600036","name":"جواهر بنت عبدالرحمن بن سعود الرقطان","id":"1143056339","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"131600037","name":"جود بنت عبدالله بن ابراهيم الحكمي","id":"1144554944","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"131600038","name":"جود عبدالله صالح العمودي","id":"2264610615","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"131600039","name":"جودي بنت سليمان بن عبدالله ال ثابت الشهراني","id":"1144122734","grade":"الثالث الثانوي","section":"المسار العام","notes":""}],"14":[{"serial":1,"seat":"131600040","name":"جوري بنت احمد بن عبدالكريم الحمد","id":"1144138813","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"131600041","name":"حصه بنت احمد بن محمد الخنفري القحطاني","id":"1144008586","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"131600042","name":"حنان بنت صقر بن صالح برمان آل حزيه","id":"1141749893","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"131600043","name":"حوراء بنت حسن بن ناجي ابو صالح","id":"1142860012","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"131600044","name":"حوريه بنت خير الله بن تركي الحسني العنزي","id":"1144490750","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"131600045","name":"داليا بنت عبدالعزيز بن صالح الدحيلان","id":"1144123294","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"131600046","name":"دانه بنت ماجد بن ناصر الرويجح","id":"1143623070","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"131600047","name":"دانيا بنت مشهور بن حسين المهودي","id":"1143024717","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"131600048","name":"دلال بنت مرزوق بن ناصر المخاريم الدوسري","id":"1145039333","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"131600049","name":"ديما بنت جميل بن عبدالكريم الحمد","id":"1146203250","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"131600050","name":"دينا خالد صالح باغبره العمودي","id":"2258583471","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"131600051","name":"رؤى بنت تركي بن مانع بن قصعان آل شملان","id":"1145520530","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"131600052","name":"راما بنت ابراهيم بن محمد آل رشيد القحطاني","id":"1141644938","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"131600053","name":"رزان بنت محفوض بن حسين المريحل","id":"1144968995","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"131600054","name":"رشا بنت نوري بن علي المرزوق","id":"1142429198","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"131600055","name":"رغد بنت سلمان بن عبدالله البوادوم الدوسري","id":"1144787148","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"131600056","name":"رغد صادق فرحان عبدالله","id":"2427729468","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"131600057","name":"رغد يحيى نعمان غانم","id":"2263862274","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"131600058","name":"رميس بنت معلوي بن مقبول آل مقبول الغامدي","id":"1172424127","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"131600059","name":"رنا امين مسعد عبده المنتصر","id":"2398803052","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"131600060","name":"رند بنت عبدالعزيز بن عبدالرحمن الضويحي","id":"1144808944","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"131600061","name":"رند بنت عبدالله بن سعد الجروي القحطاني","id":"1144770128","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"131600062","name":"رند بنت عبدالله بن محمد آل حيدان الشهري","id":"1144332895","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"131600063","name":"رنيم بنت سعد بن عبدالله الثورى السبيعي","id":"1152793947","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"131600064","name":"رنيم بنت صالح بن علي بن سعره","id":"1145902225","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"131600065","name":"رنيم بنت ممدوح بن خالد المسعود","id":"1143735650","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"131600066","name":"رهف بنت عبدالله بن صالح المزيعل","id":"1143964672","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"131600067","name":"روان بنت مساعد بن عبدالله الثورى السبيعي","id":"1165884733","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"131600068","name":"ريتاج بنت عبد المجيد بن فهد الخمعلي العنزي","id":"1142524873","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"131600069","name":"ريتاج بنت يوسف بن جاسم البراهيم","id":"1142795531","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"131600070","name":"ريتاج محمد حميد عقلان","id":"2271350817","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"131600071","name":"ريتال بنت علي بن حسن القمري","id":"1164702456","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"131600072","name":"ريتال بنت محمد بن ابراهيم الزعبي","id":"1144617873","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"131600073","name":"ريفان بنت جلال بن سلطان العريفان","id":"1141402006","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"131600074","name":"ريفان بنت فالح بن حليس الخيلات الدوسري","id":"1143205233","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"131600076","name":"ريم بنت وليد بن علي الصفي","id":"1145270623","grade":"الثالث الثانوي","section":"المسار العام","notes":""}],"15":[{"serial":1,"seat":"131600077","name":"ريما بنت ابراهيم بن سعد آل شائع","id":"1144457106","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"131600078","name":"ريما بنت ابراهيم بن عيسى الدموخ الدوسري","id":"1143250874","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"131600079","name":"ريماس بنت احمد بن ناصر قحشي عبده","id":"1140439850","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"131600080","name":"ريماس بنت مهدي بن احمد شويهي","id":"1142187911","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"131600081","name":"ريماس بنت وليد بن محمد المقيرن","id":"1138440316","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"131600082","name":"ريماس محمد صالح باعاصم","id":"2264383122","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"131600083","name":"ريناد بنت حمد بن خضر ولد علي العنزي","id":"1141347441","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"131600084","name":"ريناد بنت راشد بن محمد الحديثي","id":"1146628423","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"131600085","name":"زهراء بنت سعيد بن علي الخميس","id":"1144895917","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"131600086","name":"زهراء بنت عبدالحميد بن امير المرهون","id":"1144356852","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"131600087","name":"زينب بنت حسين بن علي العبدالعزيز","id":"1143653077","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"131600088","name":"زينه بنت وليد بن عبدالرحمن بالطيور","id":"1141546448","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"131600089","name":"سارا بنت جمعان بن حسين الهملان القحطاني","id":"1141027043","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"131600090","name":"سارة بنت حسن بن عبدالله آل زيدان الشهري","id":"1144748686","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"131600091","name":"سارة بنت سامي بن محمد باصويلح","id":"1172080929","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"131600092","name":"سارة بنت عدنان بن احمد الفضل","id":"1143519658","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"131600093","name":"سدن سالم محسن بن شحبل","id":"2277335630","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"131600094","name":"سلمى بنت عبدالعزيز بن مانع الشبوى القحطانى","id":"1145109367","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"131600095","name":"سلوى بنت ظافر بن عجب الخنفري القحطاني","id":"1146869548","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"131600096","name":"سما بنت علي بن حسين العلي","id":"1139445827","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"131600097","name":"سهى بنت حسن بن فالح المسعري الدوسري","id":"1149437335","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"131600098","name":"شادن بنت سعد بن سعيد آل فارح","id":"1145518864","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"131600099","name":"شجون بنت فهد بن ابراهيم الراجح","id":"1141346724","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"131600100","name":"شذى بنت ناصر بن عبدالله الكعبي العمري","id":"1165123843","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"131600101","name":"شهد بنت ابوبكر بن حسن بامردوف","id":"1145406292","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"131600102","name":"شهد بنت زكريا بن هاشم الأسد","id":"1144035100","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"131600103","name":"شهد بنت ضيف الله بن حسين مصبح القحطاني","id":"1157383934","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"131600104","name":"شهد بنت عدنان بن سعيد العامودى","id":"1141514917","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"131600105","name":"شهد بنت محمد بن خليف الحمياني المطيري","id":"1142764420","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"131600106","name":"شهد بنت محمد بن دحيم الودعاني الدوسري","id":"1144553565","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"131600107","name":"شهد بنت محمد بن ضاحى الدموخ الدوسري","id":"1142287778","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"131600108","name":"شهد بنت محمد بن يوسف ديريه","id":"1141509560","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"131600109","name":"شهلا بنت احمد بن محمد المهلهل","id":"1151019252","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"131600110","name":"شهلا بنت بندر بن محمد ال سنان اليامي","id":"1143874574","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"131600111","name":"شوق بنت ثنيان بن برجس الغيثي الشمري","id":"1143709085","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":36,"seat":"131600112","name":"صبا بنت ناصر بن فهاد الجبيري","id":"1143860144","grade":"الثالث الثانوي","section":"المسار العام","notes":""}],"16":[{"serial":1,"seat":"131600113","name":"صيته بنت سالم بن عبدالله ال بويت الفضلي","id":"1143992277","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"131600114","name":"صيته بنت عبدالعزيز بن راشد آل سعد القحطاني","id":"1148470923","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"131600115","name":"ضوى بنت خليل بن ابراهيم بوشليبي","id":"1146503907","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"131600116","name":"ضي بنت عبدالله بن محمد ال عتيق","id":"1144720834","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"131600117","name":"ضي بنت فهد بن الطرقي مجلاد العنزي","id":"1207129733","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"131600118","name":"ظبيه بنت محمد بن عبدالله حبيب","id":"1184256525","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"131600119","name":"عائشه بنت سالم بن احمد الجربوعي الشهري","id":"1143553269","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"131600120","name":"عائشه بنت عاصم بن عبدالله باموسى","id":"1144447636","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"131600121","name":"عبير بنت علي بن يحي الخالدي المالكي","id":"1143763751","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"131600122","name":"علياء بنت سعد بن فهيد آل بريك الدوسري","id":"1142360773","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"131600123","name":"غادة بنت تركي بن علي قدري ال مشرف","id":"1145353270","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"131600124","name":"غاده بنت محمد بن صالح باغبره","id":"1145341598","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"131600125","name":"غاليه بنت مسفر بن غرم الله الشمراني","id":"1172482737","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"131600126","name":"غرام بنت سعيد بن حسن القحطاني","id":"1142490828","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"131600127","name":"غزلان بنت سلمان بن علي السعود","id":"1143037032","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"131600128","name":"غلا بنت احمد بن خليفه المتعب","id":"1146267305","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"131600129","name":"غلا بنت سعيد بن عوض آل فرحان اليامي","id":"1142291002","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"131600130","name":"غلا بنت علي بن مهدي أل حارث","id":"1164181537","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"131600131","name":"غلا بنت علي بن ناجم النويجم","id":"1144878194","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"131600132","name":"غلا بنت عوض بن خشمان الشبيشير المطيري","id":"1146078447","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"131600133","name":"غلا بنت فالح بن عبدالعزيز الفالح","id":"1159955978","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"131600134","name":"غلا بنت فراج بن عيد الغريري الدوسري","id":"1149668129","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"131600135","name":"غيداء بنت محمد بن جفيران الحقباني","id":"1150213591","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"131600136","name":"فاطمة بنت محمد بن أحمد العبداللطيف","id":"1145821839","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"131600137","name":"فاطمه بنت عباس بن حسين بن حمد","id":"1143162970","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"131600138","name":"فاطمه بنت عبد الرحمن بن عبدالله المذن","id":"1142805934","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"131600139","name":"فاطمه بنت محمود بن باقر الأمير","id":"1145292056","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"131600140","name":"فريده بنت خلف بن عبيد العصيمي العتيبي","id":"1156339812","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"131600141","name":"فوز بنت مفرح بن خلف الضوي العنزي","id":"1141355659","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"131600142","name":"في بنت وليد بن صالح الدرعه","id":"1144372222","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"131600143","name":"لانا بنت صالح بن محمد السريحي","id":"1144512124","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"131600144","name":"لجين بنت سعد بن مشيخص الكرعان القرني","id":"1146728876","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"131600145","name":"لجين بنت فايز بن ظافر الكناني الشهري","id":"1142203007","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"131600146","name":"لمار بنت نايف بن علي أل دعرم الشهرانى","id":"1145180780","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"131600147","name":"لمى بنت عبيد بن عبدالله الشهراني","id":"1140784750","grade":"الثالث الثانوي","section":"المسار العام","notes":""}],"17":[{"serial":1,"seat":"131600148","name":"لورا بنت طارق بن يحيى آل نصيب","id":"1157701523","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"131600149","name":"لولوه بنت أحمد بن عايد المبلع","id":"1142766516","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"131600150","name":"ليان الزبير محمد محمد الحمادي","id":"2279603803","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"131600151","name":"ليان بنت احمد بن محمد الدويش","id":"1145380927","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"131600152","name":"ليان بنت امين بن احمد قروان","id":"1142146685","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"131600153","name":"ليان بنت عبداللطيف بن صالح السليم","id":"1145165252","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"131600154","name":"ليلى بنت خالد بن حمد الرميحي","id":"1143091708","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"131600155","name":"لين بنت احمد بن مدهش سعيد","id":"1141862530","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"131600156","name":"لينا سعيد عبيد باناعمه","id":"2270165174","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"131600157","name":"مدى بنت موسى بن محمد الحسني الزهراني","id":"1142100013","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"131600158","name":"مريم بنت حمد بن عبدالكريم الحمود","id":"1145153688","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"131600159","name":"مريم بنت عيسى بن حسين الامير","id":"1142940566","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"131600160","name":"مريم بنت فهد بن عبدالله الأحمد","id":"1143333548","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"131600162","name":"منار بنت ضيف الله بن حمد الجياشي الحارثي","id":"1143923264","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"131600164","name":"منيرة بنت حسين بن مبارك آل زايد الهاجري","id":"1140493667","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"131600166","name":"منيرة بنت ماجد بن فهد المتعب","id":"1145653083","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"131600167","name":"منيره بنت سالم بن محمد الطراق الهاجري","id":"1149350421","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"131600168","name":"مها بنت خالد بن عبدالرحمن المديني","id":"1146114598","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"131600169","name":"مها بنت خليف بن حمود الغازي الشمري","id":"1138284177","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"131600170","name":"مها بنت عيسى بن علي السرور","id":"1144692835","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"131600171","name":"مها بنت هادي بن دلهم ال فهيد الهاجري","id":"1144187109","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"131600172","name":"موج بنت عامر بن خيري ال عوض الشهري","id":"1154888133","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"131600173","name":"موضي بنت أحمد بن عبد الرزاق الراجح","id":"1144125737","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"131600175","name":"ميار بنت سعد بن حسن آل سعد القحطاني","id":"1142866746","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"131600176","name":"ميان بنت سلطان بن مثيب المقاطي العتيبي","id":"1144297825","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"131600177","name":"ميرال بنت محمد بن ناصر آل مقبل القحطاني","id":"1144170667","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"131600178","name":"ميس بنت عبدالرحمن بن محمد الطريف","id":"1143807228","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"131600179","name":"ناجية بنت نايف بن عبدالعزيز العوده الفضلي","id":"1144404850","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"131600180","name":"نادين بنت رضوان بن سفر آل قريش القحطانى","id":"1147034183","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"131600181","name":"نجلاء بنت محمد بن يحيى أل خليل الشيخى","id":"1144213749","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"131600182","name":"نجود بنت عبدالمنعم بن ابراهيم القطنان","id":"1142276771","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"131600183","name":"نجود بنت ناجي بن احمد القاسم","id":"1139918351","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"131600184","name":"ندى بنت عبدالله بن عبدالرحمن الدوسري","id":"1141469633","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"131600185","name":"نرجس جميل ابراهيم محمد احمد الحواج","id":"70815038","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"131600186","name":"نعمه نشوان علي الصيادي","id":"2409692221","grade":"الثالث الثانوي","section":"المسار العام","notes":""}],"18":[{"serial":1,"seat":"131600011","name":"الهام بنت عيسى بن حسن الطواش","id":"1039273725","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"131600015","name":"ايلاف بنت ياسين بن صالح العويد السبيعي","id":"1144855341","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"131600075","name":"ريم بنت وليد بن عبدالله الهندي الخالدي","id":"1146750508","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"131600161","name":"مزنه بنت سالم بن محمد الجربوعي المري","id":"1017343151","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"131600174","name":"مياده حميد محمد عقلان","id":"2178663478","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"131600187","name":"نعيمة بنت عماد بن عبدالعزيز الحمام","id":"1143916904","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":7,"seat":"131600188","name":"نغم بنت عبدالله بن سعد العبود","id":"1141452969","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":8,"seat":"131600189","name":"نور بنت فاضل بن حبيب العبدالله","id":"1144194840","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":9,"seat":"131600190","name":"نورا بنت خالد بن صالح اللقمان","id":"1144826474","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":10,"seat":"131600191","name":"نورا توفيق عبدالعزيز المشولي","id":"2282334404","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":11,"seat":"131600192","name":"نورة بنت خالد بن احمد سامطر","id":"1144384201","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":12,"seat":"131600193","name":"نورة بنت عبدالله بن محمد الدراج","id":"1148790866","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":13,"seat":"131600194","name":"نورة محمد صالح وهاش","id":"2254827302","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":14,"seat":"131600195","name":"نوره بنت خالد بن مجول المسعري الدوسري","id":"1145666531","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":15,"seat":"131600196","name":"نوره بنت سلطان بن محمد آل سويدان القحطاني","id":"1142402302","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":16,"seat":"131600197","name":"نوره بنت عثمان بن احمد المحارفى","id":"1143995882","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":17,"seat":"131600198","name":"نوره بنت مسلم بن جمعان العمار الدوسري","id":"1142217809","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":18,"seat":"131600199","name":"نوره بنت مشعل بن مدري الجاهلي الثقفي","id":"1146571987","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":19,"seat":"131600200","name":"نوف بنت خالد بن صالح اللقمان","id":"1144826466","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":20,"seat":"131600201","name":"هاجر بنت سالم بن حسين شاهين","id":"1213378100","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":21,"seat":"131600202","name":"هديل بنت محمد بن احمد آل بن علي","id":"1142201712","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":22,"seat":"131600203","name":"هند بنت محمد بن عبدالرحمن البراك","id":"1142499928","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":23,"seat":"131600204","name":"هيا بنت عبدالله بن سعود العصيمي العتيبي","id":"1143440210","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":24,"seat":"131600205","name":"هيا بنت عبدالله بن محمد الصعنونى","id":"1142865953","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":25,"seat":"131600206","name":"هيفاء بنت تركي بن وصل الله المسيلي الحارثي","id":"1144043401","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":26,"seat":"131600207","name":"وجدان بنت سعد ابن حسن المري","id":"1140858794","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":27,"seat":"131600208","name":"ود خالد جمعان بن عجاج","id":"2265265427","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":28,"seat":"131600209","name":"وصايف بنت ناصر بن علي نعيمان العفاري","id":"1142663846","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":29,"seat":"131600210","name":"وضحى بنت ابراهيم بن عبدالله بوشليبي","id":"1144649090","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":30,"seat":"131600211","name":"وضحى بنت محمد بن ابراهيم المشرف","id":"1144281902","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":31,"seat":"131600212","name":"يارا بنت ابراهيم بن محمد التويجري","id":"1142267754","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":32,"seat":"131600213","name":"يارا بنت حسني بن مبارك بانخر","id":"1142409489","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":33,"seat":"131600214","name":"يارا بنت سعد بن محمد آل لثيان","id":"1143189007","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":34,"seat":"131600215","name":"يارا بنت علي ابن محمد آل معدي القحطاني","id":"1143600029","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":35,"seat":"131600216","name":"ياسمين بنت دحيم بن عواض الحربي","id":"1144187091","grade":"الثالث الثانوي","section":"المسار العام","notes":""}],"19":[{"serial":1,"seat":"111450001","name":"آمنه عبدالله سعيد بادغيش","id":"2250709991","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":2,"seat":"111450037","name":"جنى بنت عماد بن سليمان الصقعوب","id":"1138783392","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":3,"seat":"111450043","name":"جود بنت ماجد بن صالح ال مستنير اليامي","id":"1157158906","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":4,"seat":"111450057","name":"دانه بنت علي بن محمد العمري","id":"1160418537","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":5,"seat":"111450075","name":"رغد بنت رائد بن مبارك النصيب","id":"1151849377","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":6,"seat":"111450081","name":"رهف بنت سلطان بن عايض بن بلال الدموخ","id":"1134456696","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":7,"seat":"111450097","name":"ريماس بنت عيسى بن عبدالله الخضر","id":"1147581696","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":8,"seat":"111450125","name":"شهد بنت فيصل بن عبد الرحمن الذوادي","id":"1158778199","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":9,"seat":"111450136","name":"غلا طلال بن سلطان الداريني","id":"1152206494","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":10,"seat":"111450148","name":"فنار بنت عبدالله بن عيسى الحساوي","id":"1151731427","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":11,"seat":"111450172","name":"لين بنت سمير بن محمد عبدالكريم","id":"1121351645","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":12,"seat":"111450176","name":"مرام بنت محمد بن راضي الخالدي","id":"1145696736","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":13,"seat":"111450181","name":"مريم علي عبدالله بن جبير","id":"2307241568","grade":"الأول الثانوي","section":"السنة المشتركة","notes":""},{"serial":14,"seat":"111960001","name":"أثير بنت علي بن عبدالله كيلاني محنشي","id":"1149493528","grade":"الأول الثانوي","section":"السنة المشتركة ضعاف سمع في مدارس التعليم العام","notes":""},{"serial":15,"seat":"111960002","name":"جوانا بنت عويضه بن احمد القرني","id":"1152096721","grade":"الأول الثانوي","section":"السنة المشتركة ضعاف سمع في مدارس التعليم العام","notes":""},{"serial":16,"seat":"111960003","name":"رحاب بنت سفر بن فيحان المرزوقي البقمي","id":"1147069585","grade":"الأول الثانوي","section":"السنة المشتركة ضعاف سمع في مدارس التعليم العام","notes":""},{"serial":17,"seat":"111960004","name":"عائشه بنت بندر بن علي آل مسفر الاسمري","id":"1151618103","grade":"الأول الثانوي","section":"السنة المشتركة ضعاف سمع في مدارس التعليم العام","notes":""},{"serial":18,"seat":"111960005","name":"لمار بنت خليل بن عزيز الحربي","id":"1148696998","grade":"الأول الثانوي","section":"السنة المشتركة ضعاف سمع في مدارس التعليم العام","notes":""},{"serial":19,"seat":"111960006","name":"لين حسام - حمدان","id":"2284168388","grade":"الأول الثانوي","section":"السنة المشتركة ضعاف سمع في مدارس التعليم العام","notes":""}],"20":[{"serial":1,"seat":"121600012","name":"أمل بنت علي بن يحي العطيفي","id":"1137198113","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"121600031","name":"جوري بنت طارق بن حامد بن ظافر ال دغرير","id":"1146542244","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"121600091","name":"زينب بنت احمد بن قاسم الناصر","id":"1148521543","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"121600138","name":"فاطمة بنت مصطفى بن عبدالجليل الفضل","id":"1147059230","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":5,"seat":"121600142","name":"فاطمه بنت وليد بن محمد بن عبدالله الملحم","id":"1149386300","grade":"الثاني الثانوي","section":"المسار العام","notes":""},{"serial":6,"seat":"121900001","name":"رسيل بنت فهد بن محمد آل مجدوع الشهري","id":"1137959993","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":7,"seat":"121900002","name":"رغد بنت عبدالاله بن عيسى ابو الرشيد","id":"1143330916","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":8,"seat":"121900003","name":"رنيم بنت سعد ابن مبارك القحطاني","id":"1142187887","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":9,"seat":"121900004","name":"سيليا محمد فوزي هدروس","id":"2277888257","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":10,"seat":"121900005","name":"صالحه بنت محمد بن عبدالله المحمد الدوسري","id":"1146868912","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":11,"seat":"121900006","name":"ليان بنت عبد العزيز بن عتيق الطليان","id":"1134036381","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":12,"seat":"121900007","name":"هديل بنت بدر بن صالح البوعريش","id":"1143838595","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":13,"seat":"121900008","name":"هيان بنت خالد بن عيسى الصويتي","id":"1146608607","grade":"الثاني الثانوي","section":"المسار العام ضعاف سمع","notes":""}],"21":[{"serial":1,"seat":"131600034","name":"جنى بنت محمد بن جمعان آل عجاج النهدي","id":"1140843200","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":2,"seat":"131600163","name":"منار بنت عمر بن احمد الزريق","id":"1125567378","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":3,"seat":"131600165","name":"منيرة بنت خالد بن عبدالله الزريق الخالدي","id":"1143894762","grade":"الثالث الثانوي","section":"المسار العام","notes":""},{"serial":4,"seat":"131900001","name":"تالا بنت ظيف الله بن محمد الأحمري","id":"1138171101","grade":"الثالث الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":5,"seat":"131900002","name":"ريوف بنت حسن بن مبارك الحارثي","id":"1143375572","grade":"الثالث الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":6,"seat":"131900003","name":"سلمى بنت عبدالله بن فهاد الرشيدي","id":"1143306908","grade":"الثالث الثانوي","section":"المسار العام ضعاف سمع","notes":""},{"serial":7,"seat":"131900004","name":"يارا بنت محمد بن عامر اليامي","id":"1138625650","grade":"الثالث الثانوي","section":"المسار العام ضعاف سمع","notes":""}]};
+
+const GRADE_COMMITTEES = {
+  1: {name:'أول ثانوي', nums:[1,2,3,4,5,6,19]},
+  2: {name:'ثاني ثانوي', nums:[7,8,9,10,11,12,20]},
+  3: {name:'ثالث ثانوي', nums:[13,14,15,16,17,18,21]}
+};
+
+function openCommittees(gradeKey){
+  const grade = GRADE_COMMITTEES[gradeKey];
+  document.getElementById('modalTitle').textContent = 'لجان ' + grade.name;
+  const tabsEl = document.getElementById('committeeTabs');
+  tabsEl.innerHTML = '';
+  grade.nums.forEach((num,i) => {
+    if(!COMMITTEES[num]) return;
+    const btn = document.createElement('button');
+    btn.className = 'committee-tab' + (i===0?' active':'');
+    btn.textContent = 'لجنة ' + num;
+    btn.onclick = () => showCommittee(num, btn);
+    tabsEl.appendChild(btn);
+  });
+  showCommittee(grade.nums[0]);
+  document.getElementById('committeeModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function showCommittee(num, btn){
+  if(btn){
+    document.querySelectorAll('.committee-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const students = COMMITTEES[num] || [];
+  const list = document.getElementById('studentList');
+  list.innerHTML = students.map(s => `
+    <div class="student-item">
+      <div class="student-info">
+        <div class="student-name">${s.name}</div>
+        <div class="student-meta">
+          <span>رقم الجلوس: ${s.seat}</span>
+          <span>•</span>
+          <span>${s.grade}</span>
+        </div>
+      </div>
+      <div class="student-serial">${s.serial}</div>
+    </div>
+  `).join('');
+}
+
+function closeModal(){
+  document.getElementById('committeeModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('committeeModal').addEventListener('click',(e)=>{
+  if(e.target.id==='committeeModal') closeModal();
+});
+
+function normalizeArabic(str){
+  return String(str||'')
+    .replace(/[\u064B-\u0652]/g,'')
+    .replace(/[\u0622\u0623\u0625\u0627]/g,'\u0627')
+    .replace(/\u0649/g,'\u064A')
+    .replace(/\u0629/g,'\u0647')
+    .replace(/\u0624/g,'\u0648')
+    .replace(/\u0626/g,'\u064A')
+    .replace(/\s+/g,' ')
+    .trim()
+    .toLowerCase();
+}
+
+function performSearch(){
+  const query = document.getElementById('searchInput').value.trim();
+  const resultsEl = document.getElementById('searchResults');
+  if(!query || query.length < 2){resultsEl.innerHTML='';return}
+  
+  // Detect if query is mostly digits
+  const digitsOnly = query.replace(/\D/g,'');
+  const isNumericSearch = digitsOnly.length >= 3 && digitsOnly.length/query.length > 0.7;
+  
+  const normalizedQuery = normalizeArabic(query);
+  const results = [];
+  
+  for(const [num, students] of Object.entries(COMMITTEES)){
+    for(const s of students){
+      let match = false;
+      
+      if(isNumericSearch){
+        if(s.id && String(s.id).includes(digitsOnly)) match = true;
+        else if(s.seat && String(s.seat).includes(digitsOnly)) match = true;
+      }
+      
+      if(!match && normalizedQuery.length >= 2){
+        if(normalizeArabic(s.name).includes(normalizedQuery)) match = true;
+      }
+      
+      if(match){
+        results.push({committee:num, ...s});
+        if(results.length >= 30) break;
+      }
+    }
+    if(results.length >= 30) break;
+  }
+  
+  if(results.length === 0){
+    resultsEl.innerHTML = `<div class="no-results">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.4;margin-bottom:12px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <div>لا توجد نتائج مطابقة</div>
+      <div style="font-size:13px;margin-top:8px;opacity:0.7">جربي البحث بالاسم كاملاً أو رقم الهوية أو رقم الجلوس</div>
+    </div>`;
+    return;
+  }
+  
+  const countText = results.length >= 30 ? '(أول ٣٠ نتيجة - حاولي تخصيص البحث)' : `(${results.length} ${results.length === 1 ? 'نتيجة' : 'نتائج'})`;
+  
+  resultsEl.innerHTML = `<div style="text-align:right;color:var(--text-muted);font-size:13px;margin-bottom:12px;padding:0 4px">${countText}</div>` + 
+    results.map(r => `
+    <div class="result-card">
+      <div class="result-name">${r.name}</div>
+      <div class="result-row">
+        <span>رقم الهوية: ${r.id || '—'}</span>
+      </div>
+      <div class="result-row">
+        <span>رقم الجلوس: ${r.seat || '—'}</span>
+        <span>•</span>
+        <span>${r.grade}</span>
+      </div>
+      <div class="result-row">
+        <span class="result-tag">لجنة رقم ${r.committee}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Escape') closeModal();
+});
+</script>
+
+</body>
+</html>
